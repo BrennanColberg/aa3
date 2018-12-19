@@ -112,6 +112,15 @@ class App extends Component {
     });
   }
 
+  /**
+   * Empties thee current nation's inventory; called when units are placed.
+   */
+  emptyInventory() {
+    this.setState({
+      inventory: []
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -126,10 +135,11 @@ class App extends Component {
 
           addToCart={(unit) => this.addUnitToCart(unit)}
           removeFromCart={(unit) => this.removeUnitFromCart(unit)}
-          onClick={() => this.handleCheckout()}
+          checkout={() => this.handleCheckout()}
         />
         <UnitInventory
           inventory={this.state.inventory}
+          onClick={() => this.emptyInventory()}
         />
       </div>
     );

@@ -5,19 +5,27 @@ import React from 'react';
  */
 const UnitShop = (props) => (
   <div className="UnitShop">
+
     <p>Balance of {props.name}: ${props.balance}</p>
+
     <UnitShelf
       units={props.units}
       balance={props.balance}
       onClick={(unit) => props.addToCart(unit)}
     />
+
     <UnitCart
       cart={props.cart}
       onClick={(unit) => props.removeFromCart(unit)}
     />
-    <button onClick={() => props.onClick()}>
-      Checkout
-    </button>
+    
+    {props.cart.length > 0
+      ? <button onClick={() => props.checkout()}>
+          Checkout
+        </button>
+      : null
+    }
+
   </div>
 );
 
@@ -79,6 +87,7 @@ const UnitInventory = (props) => {
   }
   return (
     <div className="UnitInventory">
+
       {Object.keys(units).map(name => 
         <UnitListing
           unit={units[name][0]}
@@ -87,6 +96,14 @@ const UnitInventory = (props) => {
           key={name}
         />
       )}
+
+      {props.inventory.length > 0
+        ? <button onClick={() => props.onClick()}>
+            Place Pieces
+          </button>
+        : null
+      }
+
     </div>
   );
 }
