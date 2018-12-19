@@ -1,7 +1,42 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+main > * {
+  width: 50%;
+}
+
+.HUD {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.HUD * {
+  margin: auto 0;
+}
+
 button.UnitListing,
 .TerritoryDisplay button {
   --color: black;
   background-color: white;
+  color: var(--color);
   border: 2px solid var(--color);
   border-radius: 5px;
 }
@@ -17,8 +52,13 @@ button.UnitListing span {
   top: 0.4px;
 }
 
-.UnitShelf button {
-  --color: lightgreen;
+.UnitShelf button.available {
+  --color: limegreen;
+}
+
+.UnitShelf button:not(.available) {
+  color: lightgray;
+  --color: lightgray;
 }
 
 .UnitCart button {
@@ -27,11 +67,6 @@ button.UnitListing span {
 
 .UnitInventory button {
   --color: skyblue;
-}
-
-.UnitInventory button:active,
-.TerritoryDisplay .owned button:active {
-  color: black;
 }
 
 .TerritoryDisplay .owned button {

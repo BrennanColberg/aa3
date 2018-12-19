@@ -146,38 +146,60 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={() => this.goToLastNation()}>Back</button>
-        <button onClick={() => {
-          let nation = this.state.nation;
-          this.goToNextNation();
-          nation.collectIncome();
-        }}>End Turn</button>
-        <button onClick={() => this.goToNextNation()}>Next</button>
-        <UnitDisplay
-          units={this.game.units}
-
+        <nav>
+          <button onClick={() => this.goToLastNation()}>Back</button>
+          <button onClick={() => {
+            let nation = this.state.nation;
+            this.goToNextNation();
+            nation.collectIncome();
+          }}>End Turn</button>
+          <button onClick={() => this.goToNextNation()}>Next</button>
+        </nav>
+        <HUD
           name={this.state.name}
           balance={this.state.balance}
-          cart={this.state.cart}
-
-          addToCart={(unit) => this.addUnitToCart(unit)}
-          removeFromCart={(unit) => this.removeUnitFromCart(unit)}
-          checkout={() => this.handleCheckout()}
-        />
-        <UnitInventory
-          inventory={this.state.inventory}
-          onClick={() => this.emptyInventory()}
-        />
-        <TerritoryDisplay
-          alliance={this.state.nation.alliance}
-          allTerritories={Object.values(this.game.territories)}
           territories={this.state.territories}
-          conquerTerritory={(territory) => this.conquerTerritory(territory)}
         />
+        <main>
+          <div className="units">
+            <UnitDisplay
+              units={this.game.units}
+              balance={this.state.balance}
+              cart={this.state.cart}
+              addToCart={(unit) => this.addUnitToCart(unit)}
+              removeFromCart={(unit) => this.removeUnitFromCart(unit)}
+              checkout={() => this.handleCheckout()}
+            />
+            <UnitInventory
+              inventory={this.state.inventory}
+              onClick={() => this.emptyInventory()}
+            />
+          </div>
+          <TerritoryDisplay
+            alliance={this.state.nation.alliance}
+            allTerritories={Object.values(this.game.territories)}
+            territories={this.state.territories}
+            conquerTerritory={(territory) => this.conquerTerritory(territory)}
+          />
+        </main>
       </div>
     );
   }
 
+}
+
+const HUD = (props) => {
+  let income = 0;
+  for (let territory of props.territories) {
+    income += territory.value;
+  }
+  return (
+    <div className="HUD">
+      <h2>Balance: {props.balance}</h2>
+      <h1>{props.name}</h1>
+      <h2>Income: {income}</h2>
+    </div>
+  )
 }
 
 export default App;

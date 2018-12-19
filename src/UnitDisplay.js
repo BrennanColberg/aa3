@@ -6,8 +6,6 @@ import React from 'react';
 const UnitDisplay = (props) => (
   <div className="UnitDisplay">
 
-    <p>Balance of {props.name}: ${props.balance}</p>
-
     <UnitShelf
       units={props.units}
       balance={props.balance}
@@ -35,18 +33,16 @@ const UnitDisplay = (props) => (
  */
 const UnitShelf = (props) => (
   <div className="UnitShelf">
-    {props.units.map(unit => {
+    {props.units.map(unit => (
 
-      // only renders if balance is sufficient to purchase
-      return (unit.cost <= props.balance)
-        ? <UnitListing
-            unit={unit}
-            onClick={() => props.onClick(unit)}
-            key={unit.name}
-          />
-        : undefined;
+      <UnitListing
+        available={unit.cost <= props.balance}
+        unit={unit}
+        onClick={(unit.cost <= props.balance) ? () => props.onClick(unit) : () => {}}
+        key={unit.name}
+      />
 
-    })}
+    ))}
   </div>
 );
 
@@ -88,14 +84,16 @@ const UnitInventory = (props) => {
   return (
     <div className="UnitInventory">
 
-      {Object.keys(units).map(name => 
-        <UnitListing
-          unit={units[name][0]}
-          quantity={units[name].length}
-          onClick={() => {}}
-          key={name}
-        />
-      )}
+      <div>
+        {Object.keys(units).map(name => 
+          <UnitListing
+            unit={units[name][0]}
+            quantity={units[name].length}
+            onClick={() => {}}
+            key={name}
+          />
+        )}
+      </div>
 
       {props.inventory.length > 0
         ? <button onClick={() => props.onClick()}>
@@ -113,7 +111,10 @@ const UnitInventory = (props) => {
  * If there's more than one, it displays the quantity too.
  */
 const UnitListing = (props) => (
-  <button className="UnitListing" onClick={() => props.onClick()}>
+  <button 
+    className={props.available ? "UnitListing available" : "UnitListing"}
+    onClick={() => props.onClick()}
+  >
     {props.quantity > 1 ? <span> {props.quantity}</span> : null}
      {props.unit.name}
   </button>
