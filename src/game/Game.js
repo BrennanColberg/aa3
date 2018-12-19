@@ -50,6 +50,7 @@ export default class Game {
       for (let territory of startingTerritories) {
         nation.territories.push(this.territories[territory]);
         this.territories[territory].nation = nation;
+        this.territories[territory].originalNation = nation;
       }
       // get starting income based on owned territories
       nation.collectIncome();

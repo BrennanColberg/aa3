@@ -133,8 +133,14 @@ class App extends Component {
     let index = territory.nation.territories.indexOf(territory);
     territory.nation.territories.splice(index, 1);
     // add to current nation
-    territory.nation = this.state.nation;
-    this.setState({ territories: [...this.state.territories, territory] });
+    if (this.state.nation.alliance === territory.originalNation.alliance) {
+      territory.nation = territory.originalNation;
+      territory.originalNation.territories.push(territory);
+      this.setState({ territories: this.state.territories });
+    } else {
+      territory.nation = this.state.nation;
+      this.setState({ territories: [...this.state.territories, territory] });
+    }
   }
 
   render() {

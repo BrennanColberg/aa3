@@ -10,6 +10,7 @@ export default class Territory {
     }
 
     this.nation = undefined;
+    this.originalNation = undefined;
     this.borderingTerritories = [];
 
   }
