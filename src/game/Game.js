@@ -36,9 +36,31 @@ export default class Game {
 
   }
 
+  /**
+   * If passed a nation in the sequence, returns the next one; otherwise, gives
+   * the starting nation.
+   * @param {Nation} nation a nation, presumably in the sequence
+   */
   nextNation(nation) {
     if (this.nations.includes(nation)) {
-      return this.nations[(this.nations.indexOf(nation) + 1) % this.nations.length];
+      return this.nations[
+        (this.nations.indexOf(nation) + this.nations.length + 1) % this.nations.length
+      ];
+    } else if (nation === undefined) {
+      return this.nations[0];
+    }
+  }
+
+  /**
+   * If passed a nation in the sequence, returns the last one; otherwise, gives
+   * the starting nation.
+   * @param {Nation} nation a nation, presumably in the sequence
+   */
+  lastNation(nation) {
+    if (this.nations.includes(nation)) {
+      return this.nations[
+        (this.nations.indexOf(nation) + this.nations.length - 1) % this.nations.length
+      ];
     } else if (nation === undefined) {
       return this.nations[0];
     }

@@ -21,6 +21,10 @@ class App extends Component {
 
   }
 
+  /**
+   * Loads a country's data up, "focusing" on it.
+   * @param {Nation} nation country to load
+   */
   loadNation(nation) {
     let oldNation = this.state.nation;
     oldNation.balance = this.state.balance;
@@ -44,8 +48,15 @@ class App extends Component {
   /**
    * Goes to the next nation; loads their data.
    */
-  handleNextNation() {
+  goToNextNation() {
     this.loadNation(this.game.nextNation(this.state.nation));
+  }
+
+  /**
+   * Goes to the last nation; loads their data.
+   */
+  goToLastNation() {
+    this.loadNation(this.game.lastNation(this.state.nation));
   }
 
   /**
@@ -104,9 +115,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button
-          onClick={() => this.handleNextNation()}
-        >Next</button>
+        <button onClick={() => this.goToLastNation()}>Back</button>
+        <button onClick={() => this.goToNextNation()}>Next</button>
         <UnitShop
           units={this.game.units}
 
