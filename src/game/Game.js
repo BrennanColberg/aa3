@@ -3,7 +3,7 @@ import setupJSON from './data/setup.json';
 import mapJSON from './data/map.json';
 import Unit from './Unit.js';
 import Nation from './Nation.js';
-import { Territory } from './Map.js';
+import Territory from './Map.js';
 
 export default class Game {
 
@@ -28,7 +28,8 @@ export default class Game {
     this.nations = [];
     for (let entry of setupJSON.nations) {
       this.nations.push(new Nation(
-        entry.name
+        entry.name,
+        entry.alliance
       ));
     }
 
@@ -48,11 +49,21 @@ export default class Game {
       let startingTerritories = setupJSON.startingTerritories[nation.name];
       for (let territory of startingTerritories) {
         nation.territories.push(this.territories[territory]);
+        this.territories[territory].nation = nation;
       }
       // get starting income based on owned territories
       nation.collectIncome();
     }
 
+    // load territory borders
+    for (let border of mapJSON.borders) {
+      let territory1 = this.territories[border[0]];
+      let territory2 = this.territories[border[1]];
+      if (territory1 && territory2) {
+        territory1.borderingTerritories.push(territory2);
+        territory2.borderingTerritories.push(territory1);
+      }
+    }
   }
 
   /**

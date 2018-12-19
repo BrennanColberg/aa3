@@ -1,8 +1,9 @@
 export default class Nation {
 
-  constructor(name) {
+  constructor(name, alliance) {
 
     this.name = name;
+    this.alliance = alliance;
     this.balance = 0;
 
     // purchasing

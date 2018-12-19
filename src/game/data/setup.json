@@ -2,23 +2,23 @@
   "nations": [
     {
       "name": "USSR",
-      "balance": 24
+      "alliance": "Allies"
     },
     {
       "name": "Germany",
-      "balance": 40
+      "alliance": "Axis"
     },
     {
       "name": "Britain",
-      "balance": 30
+      "alliance": "Allies"
     },
     {
       "name": "Japan",
-      "balance": 30
+      "alliance": "Axis"
     },
     {
       "name": "USA",
-      "balance": 42
+      "alliance": "Allies"
     }
   ],
   "startingTerritories": {

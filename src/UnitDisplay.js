@@ -3,8 +3,8 @@ import React from 'react';
 /**
  * Handles all "shopping" during turn phase 1 for getting units.
  */
-const UnitShop = (props) => (
-  <div className="UnitShop">
+const UnitDisplay = (props) => (
+  <div className="UnitDisplay">
 
     <p>Balance of {props.name}: ${props.balance}</p>
 
@@ -120,6 +120,6 @@ const UnitListing = (props) => (
 );
 
 export {
-  UnitShop,
+  UnitDisplay,
   UnitInventory
 }

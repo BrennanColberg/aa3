@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Game from './game/Game.js';
-import { UnitShop, UnitInventory } from './UnitShop.js';
+import { UnitDisplay, UnitInventory } from './UnitDisplay.js';
+import { TerritoryDisplay } from './TerritoryDisplay.js';
+import Territory from './game/Map';
 
 class App extends Component {
 
@@ -16,7 +18,8 @@ class App extends Component {
       name: startingNation.name,
       balance: startingNation.balance,
       cart: startingNation.cart,
-      inventory: startingNation.inventory
+      inventory: startingNation.inventory,
+      territories: startingNation.territories
     };
 
   }
@@ -30,6 +33,7 @@ class App extends Component {
     oldNation.balance = this.state.balance;
     oldNation.cart = this.state.cart;
     oldNation.inventory = this.state.inventory;
+    oldNation.territories = this.state.territories;
     this.setState({
 
       // reference variables
@@ -39,7 +43,8 @@ class App extends Component {
       // relevant & commonly changed variables
       balance: nation.balance,
       cart: nation.cart,
-      inventory: nation.inventory
+      inventory: nation.inventory,
+      territories: nation.territories
 
     });
     this.forceUpdate();
@@ -120,6 +125,19 @@ class App extends Component {
     });
   }
 
+  /**
+   * Transfers a territory to the current nation's control.
+   * @param {Territory} territory territory to conquer
+   */
+  conquerTerritory(territory) {
+    // remove from old nation
+    let index = territory.nation.territories.indexOf(territory);
+    territory.nation.territories.splice(index, 1);
+    // add to current nation
+    territory.nation = this.state.nation;
+    this.setState({ territories: [...this.state.territories, territory] });
+  }
+
   render() {
     return (
       <div className="App">
@@ -130,7 +148,7 @@ class App extends Component {
           nation.collectIncome();
         }}>End Turn</button>
         <button onClick={() => this.goToNextNation()}>Next</button>
-        <UnitShop
+        <UnitDisplay
           units={this.game.units}
 
           name={this.state.name}
@@ -144,6 +162,10 @@ class App extends Component {
         <UnitInventory
           inventory={this.state.inventory}
           onClick={() => this.emptyInventory()}
+        />
+        <TerritoryDisplay
+          territories={this.state.territories}
+          conquerTerritory={(territory) => this.conquerTerritory(territory)}
         />
       </div>
     );
