@@ -69,6 +69,14 @@ button.UnitListing span {
   --color: skyblue;
 }
 
+.TerritoryDisplay {
+  text-align: right;
+}
+
+.TerritoryDisplay div {
+  margin-bottom: 10px;
+}
+
 .TerritoryDisplay .owned button {
   --color: black;
 }
