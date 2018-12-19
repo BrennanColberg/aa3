@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * Handles all "shopping" during turn phase 1 for getting units.
@@ -46,39 +46,59 @@ const UnitShelf = (props) => (
  * Displays the units that a nation currently has staged to purchase
  * (in their "shopping cart", so to speak).
  */
-const UnitCart = (props) => (
-  <div className="UnitCart">
-    {props.cart.map(unit => 
-      <UnitListing
-        unit={unit}
-        onClick={() => props.onClick(unit)}
-        key={unit.name}
-      />
-    )}
-  </div>
-);
+const UnitCart = (props) => {
+  let units = {};
+  for (let unit of props.cart) {
+    let name = unit.name;
+    if (!units[name]) units[name] = [];
+    units[name].push(unit);
+  }
+  return (
+    <div className="UnitCart">
+      {Object.keys(units).map(name => 
+        <UnitListing
+          unit={units[name][0]}
+          quantity={units[name].length}
+          onClick={() => props.onClick(units[name][0])}
+          key={name}
+        />
+      )}
+    </div>
+  );
+}
 
 /**
  * Displays all units in a nation's current purchased inventory.
  */
-const UnitInventory = (props) => (
-  <div className="UnitInventory">
-    {props.inventory.map(unit => 
-      <UnitListing
-        unit={unit}
-        onClick={() => {}}
-        key={unit.name}
-      />
-    )}
-  </div>
-);
+const UnitInventory = (props) => {
+  let units = {};
+  for (let unit of props.inventory) {
+    let name = unit.name;
+    if (!units[name]) units[name] = [];
+    units[name].push(unit);
+  }
+  return (
+    <div className="UnitInventory">
+      {Object.keys(units).map(name => 
+        <UnitListing
+          unit={units[name][0]}
+          quantity={units[name].length}
+          onClick={() => {}}
+          key={name}
+        />
+      )}
+    </div>
+  );
+}
 
 /**
  * Displays a single unit's purchase listing (name and cost).
+ * If there's more than one, it displays the quantity too.
  */
 const UnitListing = (props) => (
   <button className="UnitListing" onClick={() => props.onClick()}>
-    {props.unit.name}: ${props.unit.cost}
+    {props.quantity > 1 ? <span> {props.quantity}</span> : null}
+     {props.unit.name}
   </button>
 );
 
