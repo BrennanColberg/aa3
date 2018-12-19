@@ -37,8 +37,8 @@ export default class Game {
   }
 
   nextNation(nation) {
-    if (nation in this.nations) {
-      return this.nations[this.nations.indexOf(nation) + 1] % this.nations.length;
+    if (this.nations.includes(nation)) {
+      return this.nations[(this.nations.indexOf(nation) + 1) % this.nations.length];
     } else if (nation === undefined) {
       return this.nations[0];
     }

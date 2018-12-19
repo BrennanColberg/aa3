@@ -21,12 +21,24 @@ class App extends Component {
   }
 
   loadNation(nation) {
+    console.log(nation);
+    let oldNation = this.state.nation;
+    oldNation.balance = this.state.balance;
+    oldNation.inventory = this.state.inventory;
     this.setState({
       nation: nation,
       name: nation.name,
       balance: nation.balance,
       inventory: nation.inventory
     });
+    this.forceUpdate();
+  }
+
+  /**
+   * Goes to the next nation; loads their data.
+   */
+  handleNextNation() {
+    this.loadNation(this.game.nextNation(this.state.nation));
   }
 
   /**
@@ -53,7 +65,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        This is the app!
+        <button
+          onClick={() => this.handleNextNation()}
+        >Next</button>
         <UnitShop
           name={this.state.name}
           balance={this.state.balance}
