@@ -1,0 +1,16 @@
+button.UnitListing {
+  background-color: white;
+  border: 2px solid;
+}
+
+.UnitShelf button {
+  border-color: lightgreen;
+}
+
+.UnitCart button {
+  border-color: red;
+}
+
+.UnitInventory button {
+  border-color: lightskyblue;
+}
