@@ -15,6 +15,7 @@ class App extends Component {
       nation: startingNation,
       name: startingNation.name,
       balance: startingNation.balance,
+      cart: startingNation.cart,
       inventory: startingNation.inventory
     };
 
@@ -24,12 +25,19 @@ class App extends Component {
     console.log(nation);
     let oldNation = this.state.nation;
     oldNation.balance = this.state.balance;
+    oldNation.cart = this.state.cart;
     oldNation.inventory = this.state.inventory;
     this.setState({
+
+      // reference variables
       nation: nation,
       name: nation.name,
+      
+      // relevant & commonly changed variables
       balance: nation.balance,
+      cart: nation.cart,
       inventory: nation.inventory
+
     });
     this.forceUpdate();
   }
@@ -42,22 +50,56 @@ class App extends Component {
   }
 
   /**
+   * Puts a unit in the nation's cart and adjusts their working balance.
+   * @param {Unit} unit unit to put in cart
+   */
+  addUnitToCart(unit) {
+    console.log("adding " + unit.name + " to cart");
+    let balance = this.state.balance;
+    let cart = [...this.state.cart];
+    if (balance >= unit.cost) {
+      balance -= unit.cost;
+      cart.push(unit);
+    }
+    this.setState({
+      balance: balance,
+      cart: cart
+    });
+  }
+
+  /**
+   * Removes a unit from the nation's cart and adjusts their working balance.
+   * @param {Unit} unit unit to remove from cart
+   */
+  removeUnitFromCart(unit) {
+    console.log("removing " + unit.name + " to cart");
+    let balance = this.state.balance;
+    let cart = [...this.state.cart];
+    let index = cart.indexOf(unit);
+    if (index !== -1) {
+      cart.splice(index, 1);
+      balance += unit.cost;
+      cart.splice(index, 1);
+    }
+    this.setState({
+      balance: balance,
+      cart: cart
+    })
+  }
+
+  /**
    * Processes checkout from the unit purchasing component.
    * @param {Array} cart array of all units that were purchased
    */
-  handleCheckout(cart) {
-    // record old state values
-    let balance = this.state.balance;
+  handleCheckout() {
+    let cart = [...this.state.cart];
     let inventory = [...this.state.inventory];
-    // process all cart items
     while (cart.length > 0) {
-      balance -= cart[0].cost;
       inventory.push(cart[0]);
       cart.splice(0, 1);
     }
-    // push new states, force rendering udpate
     this.setState({
-      balance: balance,
+      cart: cart,
       inventory: inventory
     });
   }
@@ -69,10 +111,15 @@ class App extends Component {
           onClick={() => this.handleNextNation()}
         >Next</button>
         <UnitShop
+          units={this.game.units}
+
           name={this.state.name}
           balance={this.state.balance}
-          units={this.game.units}
-          onClick={(cart) => this.handleCheckout(cart)}
+          cart={this.state.cart}
+
+          addToCart={(unit) => this.addUnitToCart(unit)}
+          removeFromCart={(unit) => this.removeUnitFromCart(unit)}
+          onClick={() => this.handleCheckout()}
         />
         <UnitInventory
           inventory={this.state.inventory}
