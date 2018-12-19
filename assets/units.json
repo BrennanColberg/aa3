@@ -1,0 +1,108 @@
+{
+  "types": [
+    "ground",
+    "air",
+    "sea",
+    "other"
+  ],
+  "units": [
+    {
+      "name": "infantry",
+      "type": "ground",
+      "cost": 3,
+      "attack": 1,
+      "defense": 2,
+      "move": 1
+    },
+    {
+      "name": "artillery",
+      "type": "ground",
+      "cost": 4,
+      "attack": 2,
+      "defense": 2,
+      "move": 1,
+      "boost": [{
+        "infantry": 1
+      }]
+    },
+    {
+      "name": "tank",
+      "type": "ground",
+      "cost": 5,
+      "attack": 3,
+      "defense": 3,
+      "move": 2
+    },
+    {
+      "name": "anti-aircraft gun",
+      "type": "ground",
+      "attack": null,
+      "defense": null,
+      "move": 1
+    },
+    {
+      "name": "fighter",
+      "type": "air",
+      "cost": 10,
+      "attack": 3,
+      "defense": 4,
+      "move": 4
+    },
+    {
+      "name": "bomber",
+      "type": "air",
+      "cost": 15,
+      "attack": 4,
+      "defense": 1,
+      "move": 6
+    },
+    {
+      "name": "transport",
+      "type": "sea",
+      "cost": 8,
+      "attack": 0,
+      "defense": 1,
+      "move": 2,
+      "carry": [
+        "infantry",
+        "ground"
+      ]
+    },
+    {
+      "name": "submarine",
+      "type": "sea",
+      "cost": 8,
+      "attack": 2,
+      "defense": 1,
+      "move": 2
+    },
+    {
+      "name": "destroyer",
+      "type": "sea",
+      "cost": 12,
+      "attack": 3,
+      "defense": 3,
+      "move": 2
+    },
+    {
+      "name": "aircraft carrier",
+      "type": "sea",
+      "cost": 16,
+      "attack": 1,
+      "defense": 3,
+      "move": 2,
+      "carry": [
+        "fighter",
+        "fighter"
+      ]
+    },
+    {
+      "name": "battleship",
+      "type": "sea",
+      "cost": 24,
+      "attack": 4,
+      "defense": 4,
+      "move": 2
+    }
+  ]
+}
