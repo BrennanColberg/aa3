@@ -5,17 +5,17 @@ import React, { Component } from 'react';
  */
 const UnitShop = (props) => (
   <div className="UnitShop">
-    <p>Balance of {this.props.name}: ${this.props.balance}</p>
+    <p>Balance of {props.name}: ${props.balance}</p>
     <UnitShelf
-      units={this.props.units}
-      balance={this.props.balance}
-      onClick={(unit) => this.props.addToCart(unit)}
+      units={props.units}
+      balance={props.balance}
+      onClick={(unit) => props.addToCart(unit)}
     />
     <UnitCart
-      cart={this.props.cart}
-      onClick={(unit) => this.props.removeFromCart(unit)}
+      cart={props.cart}
+      onClick={(unit) => props.removeFromCart(unit)}
     />
-    <button onClick={() => this.props.onClick()}>
+    <button onClick={() => props.onClick()}>
       Checkout
     </button>
   </div>

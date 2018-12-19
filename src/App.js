@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   loadNation(nation) {
-    console.log(nation);
     let oldNation = this.state.nation;
     oldNation.balance = this.state.balance;
     oldNation.cart = this.state.cart;
@@ -54,7 +53,6 @@ class App extends Component {
    * @param {Unit} unit unit to put in cart
    */
   addUnitToCart(unit) {
-    console.log("adding " + unit.name + " to cart");
     let balance = this.state.balance;
     let cart = [...this.state.cart];
     if (balance >= unit.cost) {
@@ -72,7 +70,6 @@ class App extends Component {
    * @param {Unit} unit unit to remove from cart
    */
   removeUnitFromCart(unit) {
-    console.log("removing " + unit.name + " to cart");
     let balance = this.state.balance;
     let cart = [...this.state.cart];
     let index = cart.indexOf(unit);
