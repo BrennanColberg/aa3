@@ -85,7 +85,6 @@ class App extends Component {
     let cart = [...this.state.cart];
     let index = cart.indexOf(unit);
     if (index !== -1) {
-      cart.splice(index, 1);
       balance += unit.cost;
       cart.splice(index, 1);
     }
@@ -125,6 +124,11 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={() => this.goToLastNation()}>Back</button>
+        <button onClick={() => {
+          let nation = this.state.nation;
+          this.goToNextNation();
+          nation.collectIncome();
+        }}>End Turn</button>
         <button onClick={() => this.goToNextNation()}>Next</button>
         <UnitShop
           units={this.game.units}
