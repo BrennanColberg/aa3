@@ -1,4 +1,5 @@
-button.UnitListing {
+button.UnitListing,
+.TerritoryDisplay button {
   --color: black;
   background-color: white;
   border: 2px solid var(--color);
@@ -28,6 +29,19 @@ button.UnitListing span {
   --color: skyblue;
 }
 
-.UnitInventory button:active {
+.UnitInventory button:active,
+.TerritoryDisplay .owned button:active {
   color: black;
+}
+
+.TerritoryDisplay .owned button {
+  --color: black;
+}
+
+.TerritoryDisplay .bordering button {
+  --color: gray;
+}
+
+.TerritoryDisplay .disconnected button {
+  --color: lightgray;
 }

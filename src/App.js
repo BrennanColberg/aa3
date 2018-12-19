@@ -3,7 +3,6 @@ import './App.css';
 import Game from './game/Game.js';
 import { UnitDisplay, UnitInventory } from './UnitDisplay.js';
 import { TerritoryDisplay } from './TerritoryDisplay.js';
-import Territory from './game/Map';
 
 class App extends Component {
 
@@ -164,6 +163,8 @@ class App extends Component {
           onClick={() => this.emptyInventory()}
         />
         <TerritoryDisplay
+          alliance={this.state.nation.alliance}
+          allTerritories={Object.values(this.game.territories)}
           territories={this.state.territories}
           conquerTerritory={(territory) => this.conquerTerritory(territory)}
         />
