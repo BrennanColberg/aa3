@@ -1,0 +1,24 @@
+{
+  "nations": [
+    {
+      "name": "USSR",
+      "balance": 24
+    },
+    {
+      "name": "Germany",
+      "balance": 40
+    },
+    {
+      "name": "Britain",
+      "balance": 30
+    },
+    {
+      "name": "Japan",
+      "balance": 30
+    },
+    {
+      "name": "USA",
+      "balance": 42
+    }
+  ]
+}
