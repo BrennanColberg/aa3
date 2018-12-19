@@ -20,5 +20,83 @@
       "name": "USA",
       "balance": 42
     }
-  ]
+  ],
+  "startingTerritories": {
+    "USSR": [
+      "Archangel",
+      "Buryatia S.S.R.",
+      "Caucasus",
+      "Evenki National Okrug",
+      "Karelia S.S.R.",
+      "Kazakh S.S.R.",
+      "Novosibirsk",
+      "Russia",
+      "Soviet Far East",
+      "Yakut S.S.R."
+    ],
+    "Germany": [
+      "Algeria",
+      "Balkans",
+      "Belorussia",
+      "Eastern Europe",
+      "Germany",
+      "Libya",
+      "Norway",
+      "Southern Europe",
+      "Ukraine S.S.R.",
+      "West Russia",
+      "Western Europe"
+    ],
+    "Britain": [
+      "Anglo-Egypt Sudan",
+      "Australia",
+      "Belgian Congo",
+      "Eastern Canada",
+      "French Equatorial Africa",
+      "French Madagascar",
+      "French West Africa",
+      "Gibraltar",
+      "India",
+      "Italian East Africa",
+      "New Zealand",
+      "Persia",
+      "Rhodesia",
+      "Trans-Jordan",
+      "Union of South Africa",
+      "United Kingdom",
+      "Western Canada"
+    ],
+    "Japan": [
+      "Borneo",
+      "Caroline Islands",
+      "East Indies",
+      "French Indo-China",
+      "Japan",
+      "Kwangtung",
+      "Manchuria",
+      "New Guinea",
+      "Okinawa",
+      "Philippine Islands",
+      "Solomon Islands",
+      "Wake Island"
+    ],
+    "USA": [
+      "Alaska",
+      "Brazil",
+      "Central United States",
+      "China",
+      "Eastern United States",
+      "Greenland",
+      "Hawaii",
+      "Mexico",
+      "Midway",
+      "Panama",
+      "Sinkiang",
+      "West Indies",
+      "Western United States"
+    ]
+  },
+  "units": {
+
+  }
 }
