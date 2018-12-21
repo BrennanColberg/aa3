@@ -24,7 +24,21 @@ export default class Nation {
   }
 
   collectIncome() {
-    this.balance += this.calculateIncome();
+    
+    // check to make sure the nation owns their own capital
+    let hasCapital = false;
+    for (let territory of this.territories) {
+      if (territory.capital && territory.originalNation === this) {
+        hasCapital = true;
+        break;
+      }
+    }
+
+    // only collect income if capital is owned
+    if (hasCapital) {
+      this.balance += this.calculateIncome();
+    }
+
   }
 
 }
