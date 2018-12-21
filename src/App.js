@@ -129,18 +129,28 @@ class App extends Component {
    * @param {Territory} territory territory to conquer
    */
   conquerTerritory(territory) {
-    // remove from old nation
+
+    // remove from old nation's territory list
     let index = territory.nation.territories.indexOf(territory);
     territory.nation.territories.splice(index, 1);
-    // add to current nation
+
+    // add to current nation's territory list
     if (this.state.nation.alliance === territory.originalNation.alliance) {
+      // liberation (return to original owner, even current)
       territory.nation = territory.originalNation;
       territory.originalNation.territories.push(territory);
       this.setState({ territories: this.state.territories });
     } else {
+      // check for capital takeover (& steal balance if so)
+      if (territory.capital) {
+        this.setState({ balance: this.state.balance + territory.nation.balance });
+        territory.nation.balance = 0;
+      }
+      // hostile takeover (enemy territory, current now owns)
       territory.nation = this.state.nation;
       this.setState({ territories: [...this.state.territories, territory] });
     }
+
   }
 
   render() {
