@@ -2,22 +2,27 @@
   "nations": [
     {
       "name": "USSR",
+      "abbr": "USR",
       "alliance": "Allies"
     },
     {
       "name": "Germany",
+      "abbr": "GER",
       "alliance": "Axis"
     },
     {
       "name": "Britain",
+      "abbr": "GBR",
       "alliance": "Allies"
     },
     {
       "name": "Japan",
+      "abbr": "JAP",
       "alliance": "Axis"
     },
     {
       "name": "USA",
+      "abbr": "USA",
       "alliance": "Allies"
     }
   ],

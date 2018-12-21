@@ -1,8 +1,9 @@
 export default class Nation {
 
-  constructor(name, alliance) {
+  constructor(name, abbr, alliance) {
 
     this.name = name;
+    this.abbr = abbr;
     this.alliance = alliance;
     this.balance = 0;
 
@@ -24,7 +25,7 @@ export default class Nation {
   }
 
   collectIncome() {
-    
+
     // check to make sure the nation owns their own capital
     let hasCapital = false;
     for (let territory of this.territories) {
@@ -38,6 +39,8 @@ export default class Nation {
     if (hasCapital) {
       this.balance += this.calculateIncome();
     }
+
+    return hasCapital;
 
   }
 

@@ -12,6 +12,7 @@ class App extends Component {
     // initialize game state
     this.game = new Game();
     let startingNation = this.game.nextNation();
+    console.log(" ---  " + startingNation.name + " ---");
     this.state = {
       nation: startingNation,
       name: startingNation.name,
@@ -20,7 +21,6 @@ class App extends Component {
       inventory: startingNation.inventory,
       territories: startingNation.territories
     };
-
   }
 
   /**
@@ -28,6 +28,7 @@ class App extends Component {
    * @param {Nation} nation country to load
    */
   loadNation(nation) {
+    console.log(" ---  " + nation.name + " ---");
     let oldNation = this.state.nation;
     oldNation.balance = this.state.balance;
     oldNation.cart = this.state.cart;
@@ -61,6 +62,15 @@ class App extends Component {
    */
   goToLastNation() {
     this.loadNation(this.game.lastNation(this.state.nation));
+  }
+
+  /**
+   * Goes to the next nation and collects income while outgoing.
+   */
+  endCurrentTurn() {
+    let nation = this.state.nation;
+    this.goToNextNation();
+    nation.collectIncome();
   }
 
   /**
@@ -106,6 +116,7 @@ class App extends Component {
     let cart = [...this.state.cart];
     let inventory = [...this.state.inventory];
     while (cart.length > 0) {
+      this.log({"abbr":"$$$"}, this.state.nation, cart[0].name);
       inventory.push(cart[0]);
       cart.splice(0, 1);
     }
@@ -137,20 +148,33 @@ class App extends Component {
     // add to current nation's territory list
     if (this.state.nation.alliance === territory.originalNation.alliance) {
       // liberation (return to original owner, even current)
+      this.log(territory.nation, territory.originalNation, territory.name);
       territory.nation = territory.originalNation;
       territory.originalNation.territories.push(territory);
       this.setState({ territories: this.state.territories });
     } else {
       // check for capital takeover (& steal balance if so)
       if (territory.capital) {
+        this.log(territory.nation, this.state.nation, "$" + territory.nation.balance);
         this.setState({ balance: this.state.balance + territory.nation.balance });
         territory.nation.balance = 0;
       }
       // hostile takeover (enemy territory, current now owns)
+      this.log(territory.nation, this.state.nation, territory.name);
       territory.nation = this.state.nation;
       this.setState({ territories: [...this.state.territories, territory] });
     }
 
+  }
+  
+  /**
+   * Simple logging method for territory & cash transfers.
+   * @param {Nation} from nation that loses the item
+   * @param {Nation} to nation that gains the item
+   * @param {String} text description of the item to log
+   */
+  log(from, to, text) {
+    console.log("[" + from.abbr + " -> " + to.abbr + "] " + text);
   }
 
   render() {
@@ -158,11 +182,7 @@ class App extends Component {
       <div className="App">
         <nav>
           <button onClick={() => this.goToLastNation()}>Back</button>
-          <button onClick={() => {
-            let nation = this.state.nation;
-            this.goToNextNation();
-            nation.collectIncome();
-          }}>End Turn</button>
+          <button onClick={() => this.endCurrentTurn()}>End Turn</button>
           <button onClick={() => this.goToNextNation()}>Next</button>
         </nav>
         <HUD

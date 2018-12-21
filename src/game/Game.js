@@ -29,6 +29,7 @@ export default class Game {
     for (let entry of setupJSON.nations) {
       this.nations.push(new Nation(
         entry.name,
+        entry.abbr,
         entry.alliance
       ));
     }
