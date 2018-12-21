@@ -54,6 +54,7 @@ class TerritoryDisplay extends Component {
             />
           )}
         </div>
+        <button onClick={() => this.props.proceed()}>Combat Finished!</button>
       </div>
     );
   }

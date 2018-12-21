@@ -1,6 +1,14 @@
-body {
+body,
+#root,
+.app {
+  margin: 0;
+  width: 100%;
+}
+
+.App {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -11,29 +19,34 @@ nav {
   margin: 10px;
 }
 
-main {
-  display: flex;
-  flex-direction: row;
-}
-
-main > * {
-  width: 50%;
-}
-
 .HUD {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   max-width: 500px;
-  margin: 20px auto;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .HUD * {
-  margin: auto 0;
+  margin: auto 20px;
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin: 0 25px;
+}
+
+main div {
+  margin: 10px auto;
 }
 
 button.UnitListing,
-.TerritoryDisplay button {
+button.TerritoryListing {
   --color: black;
   background-color: white;
   color: var(--color);
@@ -67,14 +80,6 @@ button.UnitListing span {
 
 .UnitInventory button {
   --color: skyblue;
-}
-
-.TerritoryDisplay {
-  text-align: right;
-}
-
-.TerritoryDisplay div {
-  margin-bottom: 10px;
 }
 
 .TerritoryDisplay .owned button {

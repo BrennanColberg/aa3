@@ -19,7 +19,8 @@ class App extends Component {
       balance: startingNation.balance,
       cart: startingNation.cart,
       inventory: startingNation.inventory,
-      territories: startingNation.territories
+      territories: startingNation.territories,
+      phase: "purchase"
     };
   }
 
@@ -44,7 +45,10 @@ class App extends Component {
       balance: nation.balance,
       cart: nation.cart,
       inventory: nation.inventory,
-      territories: nation.territories
+      territories: nation.territories,
+
+      // actual state variables
+      phase: "purchase"
 
     });
     this.forceUpdate();
@@ -191,26 +195,42 @@ class App extends Component {
           territories={this.state.territories}
         />
         <main>
-          <div className="units">
-            <UnitDisplay
-              units={this.game.units}
-              balance={this.state.balance}
-              cart={this.state.cart}
-              addToCart={(unit) => this.addUnitToCart(unit)}
-              removeFromCart={(unit) => this.removeUnitFromCart(unit)}
-              checkout={() => this.handleCheckout()}
-            />
-            <UnitInventory
-              inventory={this.state.inventory}
-              onClick={() => this.emptyInventory()}
-            />
-          </div>
-          <TerritoryDisplay
-            alliance={this.state.nation.alliance}
-            allTerritories={Object.values(this.game.territories)}
-            territories={this.state.territories}
-            conquerTerritory={(territory) => this.conquerTerritory(territory)}
-          />
+          {this.state.phase === "purchase"
+            ? <UnitDisplay
+                units={this.game.units}
+                balance={this.state.balance}
+                cart={this.state.cart}
+                addToCart={(unit) => this.addUnitToCart(unit)}
+                removeFromCart={(unit) => this.removeUnitFromCart(unit)}
+                proceed={() => {
+                  this.handleCheckout();
+                  this.setState({ phase: "combat" });
+                }}
+              />
+            : <></>
+          }
+          {this.state.phase === "combat"
+            ? <TerritoryDisplay
+                alliance={this.state.nation.alliance}
+                allTerritories={Object.values(this.game.territories)}
+                territories={this.state.territories}
+                conquerTerritory={(territory) => this.conquerTerritory(territory)}
+                proceed={() => {
+                  this.setState({ phase: "place" });
+                }}
+              />
+            : <></>
+          }
+          {this.state.phase === "place"
+            ? <UnitInventory
+                inventory={this.state.inventory}
+                proceed={() => {
+                  this.emptyInventory();
+                  this.endCurrentTurn();
+                }}
+              />
+            : <></>
+          }
         </main>
       </div>
     );
@@ -225,9 +245,9 @@ const HUD = (props) => {
   }
   return (
     <div className="HUD">
-      <h2>Balance: {props.balance}</h2>
+      <h3>Balance: {props.balance}</h3>
       <h1>{props.name}</h1>
-      <h2>Income: {income}</h2>
+      <h3>Income: {income}</h3>
     </div>
   )
 }

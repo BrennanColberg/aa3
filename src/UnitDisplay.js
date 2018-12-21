@@ -17,12 +17,9 @@ const UnitDisplay = (props) => (
       onClick={(unit) => props.removeFromCart(unit)}
     />
     
-    {props.cart.length > 0
-      ? <button onClick={() => props.checkout()}>
-          Checkout
-        </button>
-      : null
-    }
+    <button onClick={() => props.proceed()}>
+      Purchasing Finished!
+    </button>
 
   </div>
 );
@@ -96,10 +93,10 @@ const UnitInventory = (props) => {
       </div>
 
       {props.inventory.length > 0
-        ? <button onClick={() => props.onClick()}>
-            Place Pieces
+        ? <button onClick={() => props.proceed()}>
+            Units Placed!
           </button>
-        : null
+        : props.proceed()
       }
 
     </div>
