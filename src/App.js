@@ -184,7 +184,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        <nav class="debug">
           <button onClick={() => this.goToLastNation()}>Back</button>
           <button onClick={() => this.goToNextNation()}>Next</button>
         </nav>

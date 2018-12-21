@@ -12,6 +12,10 @@ body,
   align-items: center;
 }
 
+.debug {
+  display: none !important;
+}
+
 nav {
   display: flex;
   flex-direction: row;
