@@ -116,7 +116,7 @@ const UnitListing = (props) => (
     onClick={() => props.onClick()}
   >
     {props.quantity > 1 ? <span> {props.quantity}</span> : null}
-     {props.unit.name}
+     {props.unit.name}: ${props.unit.cost}
   </button>
 );
 
