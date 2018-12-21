@@ -27,6 +27,11 @@ class TerritoryDisplay extends Component {
 
     return (
       <div className="TerritoryDisplay">
+
+        <button onClick={() => this.props.proceed()}>
+          Combat Finished!
+        </button>
+
         <div className="owned">
           {this.props.territories.map(territory => 
             <TerritoryListing
@@ -36,6 +41,7 @@ class TerritoryDisplay extends Component {
             />
           )}
         </div>
+
         <div className="bordering">
           {availableBorderingTerritories.map(territory => 
             <TerritoryListing
@@ -45,6 +51,7 @@ class TerritoryDisplay extends Component {
             />
           )}
         </div>
+
         <div className="disconnected">
           {availableDisconnectedTerritories.map(territory => 
             <TerritoryListing
@@ -54,7 +61,7 @@ class TerritoryDisplay extends Component {
             />
           )}
         </div>
-        <button onClick={() => this.props.proceed()}>Combat Finished!</button>
+
       </div>
     );
   }

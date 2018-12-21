@@ -6,6 +6,10 @@ import React from 'react';
 const UnitDisplay = (props) => (
   <div className="UnitDisplay">
 
+    <button onClick={() => props.proceed()}>
+      Purchasing Finished!
+    </button>
+
     <UnitShelf
       units={props.units}
       balance={props.balance}
@@ -16,10 +20,6 @@ const UnitDisplay = (props) => (
       cart={props.cart}
       onClick={(unit) => props.removeFromCart(unit)}
     />
-    
-    <button onClick={() => props.proceed()}>
-      Purchasing Finished!
-    </button>
 
   </div>
 );
@@ -81,6 +81,13 @@ const UnitInventory = (props) => {
   return (
     <div className="UnitInventory">
 
+      {props.inventory.length > 0
+        ? <button onClick={() => props.proceed()}>
+            Units Placed!
+          </button>
+        : props.proceed()
+      }
+
       <div>
         {Object.keys(units).map(name => 
           <UnitListing
@@ -91,13 +98,6 @@ const UnitInventory = (props) => {
           />
         )}
       </div>
-
-      {props.inventory.length > 0
-        ? <button onClick={() => props.proceed()}>
-            Units Placed!
-          </button>
-        : props.proceed()
-      }
 
     </div>
   );

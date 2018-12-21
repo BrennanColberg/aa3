@@ -186,7 +186,6 @@ class App extends Component {
       <div className="App">
         <nav>
           <button onClick={() => this.goToLastNation()}>Back</button>
-          <button onClick={() => this.endCurrentTurn()}>End Turn</button>
           <button onClick={() => this.goToNextNation()}>Next</button>
         </nav>
         <HUD
