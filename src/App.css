@@ -5,6 +5,23 @@ body,
   width: 100%;
 }
 
+/* non-selecting */
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+
+  cursor: default;
+}
+
+button {
+  cursor: pointer;
+  font-size: 20pt;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -20,15 +37,15 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 10px;
+  margin: 20px;
 }
 
 .HUD {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  max-width: 500px;
+  justify-content: space-around;
   margin: auto;
+  width: 80%;
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -36,6 +53,14 @@ nav {
 .HUD * {
   margin: auto 20px;
   display: block;
+}
+
+.HUD h1 {
+  font-size: 60pt;
+}
+
+.HUD h3 {
+  font-size: 40pt;
 }
 
 main {
@@ -54,19 +79,19 @@ button.TerritoryListing {
   --color: black;
   background-color: white;
   color: var(--color);
-  border: 2px solid var(--color);
-  border-radius: 5px;
+  border: 5px solid var(--color);
+  border-radius: 15px;
+  padding: 3px 15px;
 }
 
-button.UnitListing span {
+button.UnitListing span.value {
   font-weight: bold;
-  color: white;
-  background-color: var(--color);
-  border-radius: 10px;
-  padding: 0.5px 3px;
+  border-radius: 15px;
+  padding: 1px 5px;
   position: relative;
-  right: 3px;
-  top: 0.4px;
+  background-color: var(--color);
+  color: white;
+  right: 8px;
 }
 
 .UnitShelf button.available {

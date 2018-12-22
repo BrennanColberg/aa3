@@ -69,7 +69,7 @@ class TerritoryDisplay extends Component {
 
 const TerritoryListing = (props) => (
   <button className="TerritoryListing" onClick={() => props.onClick()}>
-    {props.territory.name}
+    {props.territory.name} <span class="value">[{props.territory.value}]</span>
   </button>
 );
 
